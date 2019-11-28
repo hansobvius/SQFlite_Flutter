@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'DatabaseHelper.dart';
+import 'model/User.dart';
 
 class HomePageState extends StatefulWidget{
 
@@ -10,14 +11,22 @@ class HomePageState extends StatefulWidget{
 }
 
 class _HomeState extends State<HomePageState>{
-  List<String> mName = [];
+
+  List<User> mUser = [];
+  User userModel = User();
+  final StreamController<List<User>> _streamUserController = StreamController<List<User>>();
   final dbHelper = DatabaseHelper.instance;
-  final StreamController<List<String>> _streamController = StreamController<List<String>>();
 
   @override
   void initState(){
     _query();
     super.initState();
+  }
+
+  @override
+  void dispose(){
+    _streamUserController.close();
+    super.dispose();
   }
 
   @override
@@ -27,9 +36,9 @@ class _HomeState extends State<HomePageState>{
           children: <Widget>[
             Expanded(
               child: Container(
-                child: StreamBuilder<List<String>>(
-                  stream: _streamController.stream,
-                  initialData: mName,
+                child: StreamBuilder<List<User>>(
+                  stream: _streamUserController.stream,
+                  initialData: mUser,
                   builder: (context, snapshot) {
                     if(snapshot.hasData){
                       return ListView.builder(
@@ -38,7 +47,7 @@ class _HomeState extends State<HomePageState>{
                           itemBuilder: (BuildContext context, int index){
                             return Container(
                                 child: Text(
-                                    'ROW ${index + 1}: ${snapshot.data[index]}'
+                                    'ROW ${index + 1}: NAME ${snapshot.data[index].mName} VALUE ${snapshot.data[index].mValue}'
                                 )
                             );
                           }
@@ -56,7 +65,7 @@ class _HomeState extends State<HomePageState>{
                     child: RaisedButton(
                       child: Text('insert', style: TextStyle(fontSize: 14),),
                       onPressed: (){
-                        _insert();
+                        _insert('Thiago', Random().nextInt(10));
                       },
                     ),
                   ),
@@ -72,14 +81,14 @@ class _HomeState extends State<HomePageState>{
             )
           ]
       ),
-    );;
+    );
   }
 
-  void _insert() async {
-    mName.clear();
+  void _insert(String name, int value) async {
+    mUser.clear();
     Map<String, dynamic> row = {
-      DatabaseHelper.columnName : 'Thiago',
-      DatabaseHelper.columnValue  : Random().nextInt(10)
+      DatabaseHelper.columnName : name,
+      DatabaseHelper.columnValue  : value
     };
     await dbHelper.insert(row);
     _query();
@@ -88,25 +97,21 @@ class _HomeState extends State<HomePageState>{
   void _query() async {
     final allRows = await dbHelper.queryAllRows();
     allRows.forEach((row){
-      mName.add(row.toString() as String);
-      _streamController.sink.add(mName);
+      mUser.add(
+          User(
+              mName: row['name'],
+              mValue: row['value']
+          )
+      );
+      _streamUserController.sink.add(mUser);
       print(row);
+      print(mUser);
     });
-  }
-
-  void _update() async {
-    Map<String, dynamic> row = {
-      DatabaseHelper.columnId   : 1,
-      DatabaseHelper.columnName : 'josef',
-      DatabaseHelper.columnValue  : Random().nextInt(10)
-    };
-    final rowsAffected = await dbHelper.update(row);
-    print('row updated $rowsAffected row(s)');
   }
 
   void _delete() async {
     await dbHelper.delete();
-    mName.clear();
-    _streamController.sink.add(mName);
+    mUser.clear();
+    _streamUserController.sink.add(mUser);
   }
 }
