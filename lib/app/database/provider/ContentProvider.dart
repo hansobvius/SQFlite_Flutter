@@ -1,6 +1,6 @@
-import 'package:flutter_sqflite_example/database/DatabaseHelper.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:sqflite/sqlite_api.dart';
+import '../DatabaseHelper.dart';
 
 class ContentProvider{
 

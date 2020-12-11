@@ -10,12 +10,10 @@ class DatabaseHelper {
   static final _databaseName = "MyDatabase.db";
   static final _databaseVersion = 1;
 
-  // make a singleton
   DatabaseHelper._privateConstructor();
 
   static final DatabaseHelper instance = DatabaseHelper._privateConstructor();
 
-  // database
   static Database _database;
   Future<Database> get database async {
     if (_database != null) return _database;
@@ -23,7 +21,6 @@ class DatabaseHelper {
     return _database;
   }
 
-  // create database
   _initDatabase(Function onCreate) async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
     String path = join(documentsDirectory.path, _databaseName);

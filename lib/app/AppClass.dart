@@ -1,9 +1,10 @@
 import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'file:///C:/Users/cin_tcaiado/FlutterProjects/SQFlite_Flutter/lib/database/provider/ContentProvider.dart';
-import 'package:flutter_sqflite_example/database/entity/UserDatabase.dart';
+
 import 'database/DatabaseHelper.dart';
+import 'database/entity/UserDatabase.dart';
+import 'database/provider/ContentProvider.dart';
 import 'model/User.dart';
 
 class HomePageState extends StatefulWidget{
