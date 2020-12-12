@@ -1,20 +1,5 @@
 import 'package:flutter/material.dart';
-import 'app/AppClass.dart';
+import 'app/Application.dart';
 
-void main() => runApp(AppClass());
+void main() => runApp(Application());
 
-class AppClass extends StatelessWidget{
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'SQFlite Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: Scaffold(
-        body: HomePageState(),
-      ),
-    );
-  }
-}
