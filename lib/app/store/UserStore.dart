@@ -16,7 +16,7 @@ abstract class _UserStore with Store{
   _UserStore.constructor({this.mainDomain});
 
   @observable
-  List<User> mUser;
+  ObservableList<User> mUser = ObservableList<User>();
 
   @action
   void queryUser(){
