@@ -4,13 +4,16 @@ import 'package:mobx/mobx.dart';
 
 part 'UserStore.g.dart';
 
-class UserStore = _UserStore with _$UserStore;
+class UserStore extends _UserStore with _$UserStore{
+  final MainDomain mainDomain;
+  UserStore({this.mainDomain}) : super.constructor(mainDomain: mainDomain);
+}
 
 abstract class _UserStore with Store{
 
   final MainDomain mainDomain;
 
-  _UserStore.UserStore({this.mainDomain});
+  _UserStore.constructor({this.mainDomain});
 
   @observable
   List<User> mUser;
