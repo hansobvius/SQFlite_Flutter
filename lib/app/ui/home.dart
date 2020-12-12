@@ -1,13 +1,17 @@
 import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_sqflite_example/app/di/ServiceLocator.dart';
 import '../database/DatabaseHelper.dart';
 import '../database/entity/UserDatabase.dart';
 import '../database/provider/ContentProvider.dart';
 import '../model/User.dart';
 
 class Home extends StatefulWidget{
+
+  final ServiceLocator serviceLocator;
+
+  Home({this.serviceLocator});
 
   @override
   _HomeState createState() => _HomeState();
@@ -17,10 +21,6 @@ class _HomeState extends State<Home>{
 
   List<User> mUser = [];
   User userModel = User();
-  final StreamController<List<User>> _streamUserController = StreamController<List<User>>();
-  final dbHelper = DatabaseHelper.instance;
-  final UserDatabase userDatabase = UserDatabase();
-  final ContentProvider contentProvider = ContentProvider(table: "my_table");
 
   @override
   void initState(){
@@ -30,7 +30,7 @@ class _HomeState extends State<Home>{
 
   @override
   void dispose(){
-    _streamUserController.close();
+    widget.serviceLocator.streamUserController.close();
     super.dispose();
   }
 
@@ -46,7 +46,7 @@ class _HomeState extends State<Home>{
               Expanded(
                 child: Container(
                   child: StreamBuilder<List<User>>(
-                    stream: _streamUserController.stream,
+                    stream: widget.serviceLocator.streamUserController.stream,
                     initialData: mUser,
                     builder: (context, snapshot) {
                       if(snapshot.hasData){
@@ -97,15 +97,15 @@ class _HomeState extends State<Home>{
   void _insert(String name, int value) async {
     mUser.clear();
     Map<String, dynamic> row = {
-      userDatabase.columnName : name,
-      userDatabase.columnValue  : value
+      widget.serviceLocator.userDatabase.columnName : name,
+      widget.serviceLocator.userDatabase.columnValue  : value
     };
-    await contentProvider.insert(row);
+    await widget.serviceLocator.contentProvider.insert(row);
     _query();
   }
 
   void _query() async {
-    final allRows = await contentProvider.queryAllRows();
+    final allRows = await widget.serviceLocator.contentProvider.queryAllRows();
     allRows.forEach((row){
       mUser.add(
           User(
@@ -113,15 +113,15 @@ class _HomeState extends State<Home>{
               value: row['value']
           )
       );
-      _streamUserController.sink.add(mUser);
+      widget.serviceLocator.streamUserController.sink.add(mUser);
       print(row);
       print(mUser);
     });
   }
 
   void _delete() async {
-    await contentProvider.delete();
+    await widget.serviceLocator.contentProvider.delete();
     mUser.clear();
-    _streamUserController.sink.add(mUser);
+    widget.serviceLocator.streamUserController.sink.add(mUser);
   }
 }

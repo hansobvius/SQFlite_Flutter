@@ -1,8 +1,13 @@
 import "package:flutter/material.dart";
-
+import 'di/ServiceLocator.dart';
 import 'ui/home.dart';
 
 class Application extends StatelessWidget{
+
+  final ServiceLocator serviceLocator;
+
+  Application({this.serviceLocator});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -11,7 +16,7 @@ class Application extends StatelessWidget{
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Home(),
+      home: Home(serviceLocator: serviceLocator,),
     );
   }
 }
