@@ -1,7 +1,7 @@
 class User{
 
-  String mName;
-  int mValue;
+  String name;
+  int value;
 
-  User({this.mName, this.mValue});
+  User({this.name, this.value});
 }

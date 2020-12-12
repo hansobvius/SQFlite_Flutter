@@ -52,7 +52,7 @@ class _HomeState extends State<HomePageState>{
                           itemBuilder: (BuildContext context, int index){
                             return Container(
                                 child: Text(
-                                    'ROW ${index + 1}: NAME ${snapshot.data[index].mName} VALUE ${snapshot.data[index].mValue}'
+                                    'ROW ${index + 1}: NAME ${snapshot.data[index].name} VALUE ${snapshot.data[index].value}'
                                 )
                             );
                           }
@@ -104,8 +104,8 @@ class _HomeState extends State<HomePageState>{
     allRows.forEach((row){
       mUser.add(
           User(
-              mName: row['name'],
-              mValue: row['value']
+              name: row['name'],
+              value: row['value']
           )
       );
       _streamUserController.sink.add(mUser);
