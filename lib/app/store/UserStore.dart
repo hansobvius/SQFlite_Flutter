@@ -29,11 +29,15 @@ abstract class _UserStore with Store{
 
   @action
   void insertUser(String name, int value){
+    resetUser();
     mainDomain.insert(name, value);
   }
 
   @action
   void deleteUser(){
+    resetUser();
     mainDomain.delete();
   }
+
+  void resetUser(){if(mUser.isNotEmpty) mUser.clear();}
 }

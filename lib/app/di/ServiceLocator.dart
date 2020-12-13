@@ -17,9 +17,9 @@ class ServiceLocator{
 
   ServiceLocator(){
     this.streamUserController = StreamController<List<User>>();
-    this.dbHelper = DatabaseHelper.instance;
     this.userDatabase = UserDatabase();
-    this.contentProvider = ContentProvider(table: "my_table");
+    this.dbHelper = DatabaseHelper.constructor(userDatabase: userDatabase);
+    this.contentProvider = ContentProvider(table: "my_table", db: dbHelper);
     this.mainDomain = MainDomain(contentProvider: contentProvider, userDatabase: userDatabase);
     this.userStore = UserStore(mainDomain: mainDomain);
   }
