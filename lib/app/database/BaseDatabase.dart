@@ -12,18 +12,4 @@ abstract class BaseDatabase{
   BaseDatabase(String databaseName, int version) :
         _databaseName = databaseName,
         _version = version;
-
-  Future<void> open(Database db, int version);
-
-  Future<Directory> createDir() async => await getApplicationDocumentsDirectory();
-
-  Future<Database> initDatabase() async => await _onCreate();
-
-  Future<Database> _onCreate() async {
-    Directory documentsDirectory = await createDir();
-    String path = join(documentsDirectory.path, _databaseName);
-    return openDatabase(path,
-        version: _version,
-        onCreate: open);
-  }
 }

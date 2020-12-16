@@ -30,7 +30,7 @@ abstract class _UserStore with Store{
   @action
   void insertUser(String name, int value){
     resetUser();
-    mainDomain.insert(name, value);
+    mainDomain.insert(User(name: name, value: value));
   }
 
   @action

@@ -1,19 +1,15 @@
-import 'package:flutter_sqflite_example/app/database/entity/UserDatabase.dart';
-import 'package:flutter_sqflite_example/app/database/provider/ContentProvider.dart';
+import 'package:flutter_sqflite_example/app/database/user/provider/ContentProvider.dart';
+import 'package:flutter_sqflite_example/app/model/User.dart';
 
 class MainDomain{
 
   final ContentProvider contentProvider;
-  final UserDatabase userDatabase;
 
-  MainDomain({this.contentProvider, this.userDatabase});
+  MainDomain({this.contentProvider});
 
-  void insert(String name, int value) async {
-    Map<String, dynamic> row = {
-      userDatabase.columnName : name,
-      userDatabase.columnValue  : value
-    };
-    await contentProvider.insert(row);
+  void insert(User user) async {
+    Map<String, dynamic> userRow = user.toMap();
+    await contentProvider.insert(userRow);
   }
 
   Future<List<Map<String, dynamic>>> query() async {
