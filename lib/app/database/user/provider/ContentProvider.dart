@@ -14,8 +14,7 @@ class ContentProvider implements BaseProvider{
     _initContentProvider();
   }
 
-  _initContentProvider() async {
-    this._db = await _userDatabaseHelper.getDatabase();
+  Future<void> _initContentProvider() async {
     this._table = _userDatabaseHelper.table;
   }
 
@@ -26,6 +25,7 @@ class ContentProvider implements BaseProvider{
 
   @override
   Future<List<Map<String, dynamic>>> queryAllRows() async {
+    this._db = await _userDatabaseHelper.getDatabase();
     return await _db.query(_table);
   }
 

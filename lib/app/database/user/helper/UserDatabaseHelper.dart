@@ -8,8 +8,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:sqflite/sqlite_api.dart';
 import '../../DBContract.dart';
 
-
-class UserDatabaseHelper extends BaseDatabase implements BaseContract{
+class UserDatabaseHelper extends BaseDatabase{
 
   static final _databaseName = "MyDatabase.db";
   static final _databaseVersion = 1;
@@ -25,13 +24,6 @@ class UserDatabaseHelper extends BaseDatabase implements BaseContract{
   static final UserDatabaseHelper instance = UserDatabaseHelper.constructor();
 
   @override
-  Future<Database> getDatabase() async{
-    if (_database != null) return _database;
-    _database = await _initDatabase();
-    return _database;
-  }
-
-  @override
   String entityTable() => '''
           CREATE TABLE $table (
             $columnId INTEGER PRIMARY KEY,
@@ -41,15 +33,9 @@ class UserDatabaseHelper extends BaseDatabase implements BaseContract{
           ''';
 
   @override
-  Future<void> onCreate(Database db, int version) async{
-    await db.execute(entityTable());
-  }
-
-  // TODO - check for synchronization issue when create storage file
-  Future<Database> _initDatabase() async {
-    var path = await createDir();
-    return openDatabase(path,
-        version: _databaseVersion,
-        onCreate: onCreate);
+  Future<Database> getDatabase() async{
+    if (_database != null) return _database;
+    _database = await initDatabase();
+    return _database;
   }
 }
