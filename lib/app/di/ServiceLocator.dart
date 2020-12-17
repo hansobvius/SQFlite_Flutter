@@ -7,7 +7,6 @@ import 'package:flutter_sqflite_example/app/store/UserStore.dart';
 
 class ServiceLocator{
 
-  StreamController<List<User>> streamUserController;
   UserDatabaseHelper dbHelper;
   ContentProvider contentProvider;
   UserStore userStore;
@@ -15,13 +14,24 @@ class ServiceLocator{
 
   ServiceLocator(){
     providerModule();
-    this.streamUserController = StreamController<List<User>>();
     this.dbHelper = UserDatabaseHelper.constructor();
     this.mainDomain = MainDomain(contentProvider: contentProvider);
     this.userStore = UserStore(mainDomain: mainDomain);
   }
 
-  providerModule(){
+  providerModule() async{
     this.contentProvider = ContentProvider();
+  }
+
+  dbModule(){
+
+  }
+
+  domainModule(){
+
+  }
+
+  storeModule(){
+
   }
 }

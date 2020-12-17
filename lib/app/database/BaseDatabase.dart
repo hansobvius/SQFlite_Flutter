@@ -12,4 +12,10 @@ abstract class BaseDatabase{
   BaseDatabase(String databaseName, int version) :
         _databaseName = databaseName,
         _version = version;
+
+  Future<String> createDir() async {
+    Directory documentsDirectory = await getApplicationDocumentsDirectory();
+    String path = join(documentsDirectory.path, _databaseName);
+    return path;
+  }
 }

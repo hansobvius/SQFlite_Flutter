@@ -32,12 +32,6 @@ class UserDatabaseHelper extends BaseDatabase implements BaseContract{
     return _database;
   }
 
-  Future<String> createDir() async {
-    Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = join(documentsDirectory.path, _databaseName);
-    return path;
-  }
-
   @override
   String entityTable() => '''
           CREATE TABLE $table (

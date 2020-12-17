@@ -30,7 +30,6 @@ class _HomeState extends State<Home>{
 
   @override
   void dispose(){
-    widget.serviceLocator.streamUserController.close();
     super.dispose();
   }
 
@@ -95,35 +94,4 @@ class _HomeState extends State<Home>{
       ),
     );
   }
-
-  // void _insert(String name, int value) async {
-  //   _mUser.clear();
-  //   Map<String, dynamic> row = {
-  //     widget.serviceLocator.userDatabase.columnName : name,
-  //     widget.serviceLocator.userDatabase.columnValue  : value
-  //   };
-  //   await widget.serviceLocator.contentProvider.insert(row);
-  //   _query();
-  // }
-  //
-  // void _query() async {
-  //   final allRows = await widget.serviceLocator.contentProvider.queryAllRows();
-  //   allRows.forEach((row){
-  //     _mUser.add(
-  //         User(
-  //             name: row['name'],
-  //             value: row['value']
-  //         )
-  //     );
-  //     widget.serviceLocator.streamUserController.sink.add(_mUser);
-  //     print(row);
-  //     print(_mUser);
-  //   });
-  // }
-  //
-  // void _delete() async {
-  //   await widget.serviceLocator.contentProvider.delete();
-  //   _mUser.clear();
-  //   widget.serviceLocator.streamUserController.sink.add(_mUser);
-  // }
 }
