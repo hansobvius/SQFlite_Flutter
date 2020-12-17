@@ -14,8 +14,8 @@ class ContentProvider implements BaseProvider{
     _initContentProvider();
   }
 
-  Future _initContentProvider() async {
-    this._db = await _userDatabaseHelper.database;
+  _initContentProvider() async {
+    this._db = await _userDatabaseHelper.getDatabase();
     this._table = _userDatabaseHelper.table;
   }
 

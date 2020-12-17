@@ -6,8 +6,6 @@ import 'package:path_provider/path_provider.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:sqflite/sqlite_api.dart';
-import 'package:path/path.dart';
-import 'dart:io';
 import '../../DBContract.dart';
 
 
@@ -26,7 +24,8 @@ class UserDatabaseHelper extends BaseDatabase implements BaseContract{
 
   static final UserDatabaseHelper instance = UserDatabaseHelper.constructor();
 
-  Future<Database> get database async {
+  @override
+  Future<Database> getDatabase() async{
     if (_database != null) return _database;
     _database = await _initDatabase();
     return _database;
@@ -46,6 +45,7 @@ class UserDatabaseHelper extends BaseDatabase implements BaseContract{
     await db.execute(entityTable());
   }
 
+  // TODO - check for synchronization issue when create storage file
   Future<Database> _initDatabase() async {
     var path = await createDir();
     return openDatabase(path,
