@@ -1,12 +1,7 @@
 import 'dart:async';
-import 'dart:io';
 import 'package:flutter_sqflite_example/app/database/BaseDatabase.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:sqflite/sqflite.dart';
 import 'package:sqflite/sqlite_api.dart';
-import '../../DBContract.dart';
 
 class UserDatabaseHelper extends BaseDatabase{
 
@@ -19,9 +14,9 @@ class UserDatabaseHelper extends BaseDatabase{
   final columnName = 'name';
   final columnValue = 'value';
 
-  UserDatabaseHelper.constructor(): super(_databaseName, _databaseVersion);
+  UserDatabaseHelper(): super(_databaseName, _databaseVersion);
 
-  static final UserDatabaseHelper instance = UserDatabaseHelper.constructor();
+  static final UserDatabaseHelper instance = UserDatabaseHelper();
 
   @override
   String entityTable() => '''
