@@ -7,7 +7,6 @@ class UserDatabaseHelper extends BaseDatabase{
 
   static final _databaseName = "MyDatabase.db";
   static final _databaseVersion = 1;
-  static Database _database;
 
   final table = 'my_table';
   final columnId = '_id';
@@ -28,9 +27,5 @@ class UserDatabaseHelper extends BaseDatabase{
           ''';
 
   @override
-  Future<Database> getDatabase() async{
-    if (_database != null) return _database;
-    _database = await initDatabase();
-    return _database;
-  }
+  Future<Database> getDatabase() async => getInitDatabase();
 }

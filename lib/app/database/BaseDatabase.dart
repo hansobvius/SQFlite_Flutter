@@ -9,6 +9,8 @@ import 'dart:io';
 
 abstract class BaseDatabase{
 
+  static Database _database;
+
   final String _databaseName;
   final int _version;
 
@@ -26,12 +28,19 @@ abstract class BaseDatabase{
     return path;
   }
 
-  Future<void> onCreate(Database db, int version) async{
-    await db.execute(entityTable());
+  Future<Database> getInitDatabase() async{
+    if (_database != null) return _database;
+    _database = await _initDatabase();
+    return _database;
   }
 
-  Future<Database> initDatabase() async {
+
+  Future<Database> _initDatabase() async {
     String path = await createDir();
     return await openDatabase(path, version: _version, onCreate: onCreate);
+  }
+
+  Future<void> onCreate(Database db, int version) async{
+    await db.execute(entityTable());
   }
 }
