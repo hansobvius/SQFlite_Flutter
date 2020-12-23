@@ -19,18 +19,17 @@ abstract class _UserStore with Store{
   ObservableList<User> mUser = ObservableList<User>();
 
   @action
-  void queryUser(){
-      mainDomain.query().then((value) =>
-        value.forEach((element) {
-          mUser.add(User(name: element["name"], value: element["value"]));
-        })
-      );
+  Future queryUser() async{
+    var query =  await mainDomain.query();
+    query.forEach((element) {
+      mUser.add(User().fromMap(element));
+    });
   }
 
   @action
   void insertUser(String name, int value){
     resetUser();
-    mainDomain.insert(User(name: name, value: value));
+    mainDomain.insert(User(name: name, value: value).toMap());
   }
 
   @action

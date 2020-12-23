@@ -24,18 +24,14 @@ mixin _$UserStore on _UserStore, Store {
     });
   }
 
-  final _$_UserStoreActionController = ActionController(name: '_UserStore');
+  final _$queryUserAsyncAction = AsyncAction('_UserStore.queryUser');
 
   @override
-  void queryUser() {
-    final _$actionInfo =
-        _$_UserStoreActionController.startAction(name: '_UserStore.queryUser');
-    try {
-      return super.queryUser();
-    } finally {
-      _$_UserStoreActionController.endAction(_$actionInfo);
-    }
+  Future<dynamic> queryUser() {
+    return _$queryUserAsyncAction.run(() => super.queryUser());
   }
+
+  final _$_UserStoreActionController = ActionController(name: '_UserStore');
 
   @override
   void insertUser(String name, int value) {

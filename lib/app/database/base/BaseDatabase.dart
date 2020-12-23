@@ -1,11 +1,10 @@
 import 'dart:async';
-
+import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:sqflite/sqlite_api.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
-import 'dart:io';
 
 abstract class BaseDatabase{
 
@@ -33,7 +32,6 @@ abstract class BaseDatabase{
     _database = await _initDatabase();
     return _database;
   }
-
 
   Future<Database> _initDatabase() async {
     String path = await createDir();
