@@ -1,4 +1,4 @@
-import 'package:flutter_sqflite_example/app/database/base/database/BaseProvider.dart';
+import 'file:///C:/Users/cin_tcaiado/FlutterProjects/SQFlite_Flutter/lib/app/database/base/provider/BaseProvider.dart';
 import 'package:flutter_sqflite_example/app/database/base/provider/IProvider.dart';
 import 'package:sqflite/sqflite.dart';
 import '../helper/UserDatabaseHelper.dart';

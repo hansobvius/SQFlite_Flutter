@@ -3,14 +3,16 @@ import 'package:sqflite/sqflite.dart';
 
 abstract class BaseProvider<T extends BaseDatabase>{
 
-  Database db;
   final T entityDatabase;
+
+  Database _db;
+  Database get db => _db;
 
   BaseProvider({this.entityDatabase}){
     initDataBase();
   }
 
   initDataBase() async{
-    db = await entityDatabase.getDatabase();
+    _db = await entityDatabase.getDatabase();
   }
 }

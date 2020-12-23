@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:sqflite/sqlite_api.dart';
 import 'package:path/path.dart';
@@ -13,9 +12,7 @@ abstract class BaseDatabase{
   final String _databaseName;
   final int _version;
 
-  BaseDatabase(String databaseName, int version) :
-      _databaseName = databaseName,
-      _version = version;
+  BaseDatabase(String databaseName, int version) : _databaseName = databaseName, _version = version;
 
   Future<Database> getDatabase();
 
@@ -23,7 +20,7 @@ abstract class BaseDatabase{
 
   Future<String> createDir() async {
     final Directory documentsDirectory = await path_provider.getApplicationDocumentsDirectory();
-    final String path = await join(documentsDirectory.path, _databaseName);
+    final String path = join(documentsDirectory.path, _databaseName);
     return path;
   }
 
