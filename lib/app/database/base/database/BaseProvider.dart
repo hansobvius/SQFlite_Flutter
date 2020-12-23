@@ -1,5 +1,5 @@
+import 'package:flutter_sqflite_example/app/database/base/database/BaseDatabase.dart';
 import 'package:sqflite/sqflite.dart';
-import 'BaseDatabase.dart';
 
 abstract class BaseProvider<T extends BaseDatabase>{
 
@@ -13,14 +13,4 @@ abstract class BaseProvider<T extends BaseDatabase>{
   initDataBase() async{
     db = await entityDatabase.getDatabase();
   }
-
-  Future<int> insert(Map<String, dynamic> row);
-
-  Future<List<Map<String, dynamic>>> queryAllRows();
-
-  Future<int> queryRowCount();
-
-  Future<int> update(Map<String, dynamic> row, String columnId);
-
-  Future<int> delete();
 }

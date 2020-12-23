@@ -1,9 +1,9 @@
-import 'package:flutter_sqflite_example/app/database/user/provider/ContentProvider.dart';
+import 'package:flutter_sqflite_example/app/database/table/user/content_provider/UserContentProvider.dart';
 import 'package:flutter_sqflite_example/app/model/User.dart';
 
 class MainDomain{
 
-  final ContentProvider contentProvider;
+  final UserContentProvider contentProvider;
 
   MainDomain({this.contentProvider});
 

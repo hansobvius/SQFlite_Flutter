@@ -1,10 +1,11 @@
+import 'package:flutter_sqflite_example/app/database/base/database/BaseProvider.dart';
+import 'package:flutter_sqflite_example/app/database/base/provider/IProvider.dart';
 import 'package:sqflite/sqflite.dart';
-import '../../base/BaseProvider.dart';
 import '../helper/UserDatabaseHelper.dart';
 
-class ContentProvider extends BaseProvider<UserDatabaseHelper>{
+class UserContentProvider extends BaseProvider<UserDatabaseHelper> implements IProvider{
 
-  ContentProvider() : super(entityDatabase: UserDatabaseHelper.instance);
+  UserContentProvider() : super(entityDatabase: UserDatabaseHelper.instance);
 
   @override
   Future<int> insert(Map<String, dynamic> row) async {

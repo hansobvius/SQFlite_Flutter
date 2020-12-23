@@ -1,13 +1,12 @@
 import 'dart:async';
-import 'package:flutter_sqflite_example/app/database/user/helper/UserDatabaseHelper.dart';
-import 'package:flutter_sqflite_example/app/database/user/provider/ContentProvider.dart';
+import 'package:flutter_sqflite_example/app/database/table/user/content_provider/UserContentProvider.dart';
 import 'package:flutter_sqflite_example/app/domain/MainDomain.dart';
 import 'package:flutter_sqflite_example/app/model/User.dart';
 import 'package:flutter_sqflite_example/app/store/UserStore.dart';
 
 class ServiceLocator{
 
-  ContentProvider contentProvider;
+  UserContentProvider contentProvider;
   UserStore userStore;
   MainDomain mainDomain;
 
@@ -18,7 +17,7 @@ class ServiceLocator{
   }
 
   providerModule() async{
-    this.contentProvider = ContentProvider();
+    this.contentProvider = UserContentProvider();
   }
 
   domainModule(){

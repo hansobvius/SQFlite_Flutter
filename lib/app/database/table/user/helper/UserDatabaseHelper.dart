@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:flutter_sqflite_example/app/database/base/BaseDatabase.dart';
+import 'package:flutter_sqflite_example/app/database/base/database/BaseDatabase.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:sqflite/sqlite_api.dart';
 
