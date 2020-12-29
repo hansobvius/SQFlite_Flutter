@@ -1,7 +1,5 @@
-import 'dart:async';
 import 'package:flutter_sqflite_example/app/database/table/user/content_provider/UserContentProvider.dart';
 import 'package:flutter_sqflite_example/app/domain/MainDomain.dart';
-import 'package:flutter_sqflite_example/app/model/User.dart';
 import 'package:flutter_sqflite_example/app/store/UserStore.dart';
 
 class ServiceLocator{
