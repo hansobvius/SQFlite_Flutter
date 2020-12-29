@@ -9,6 +9,7 @@ class UserTestContentProvider extends BaseProvider<UserDatabaseTestHelper> imple
 
   @override
   Future<int> insert(Map<String, dynamic> row) async {
+    if(db == null) await initDataBase();
     return await db.insert(entityDatabase.table, row);
   }
 
@@ -20,6 +21,7 @@ class UserTestContentProvider extends BaseProvider<UserDatabaseTestHelper> imple
 
   @override
   Future<int> queryRowCount() async {
+    if(db == null) await initDataBase();
     return Sqflite.firstIntValue(
         await db.rawQuery('SELECT COUNT(*) FROM $entityDatabase.table')
     );
@@ -27,11 +29,13 @@ class UserTestContentProvider extends BaseProvider<UserDatabaseTestHelper> imple
 
   @override
   Future<int> update(Map<String, dynamic> row, String columnId) async {
+    if(db == null) await initDataBase();
     return await db.update(entityDatabase.table, row, where: '$columnId = ?', whereArgs: [row[columnId]]);
   }
 
   @override
   Future<int> delete() async {
+    if(db == null) await initDataBase();
     return await db.delete(entityDatabase.table);
   }
 }

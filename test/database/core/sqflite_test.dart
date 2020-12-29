@@ -12,7 +12,7 @@ void checkInsertDB(){
   group('Database core test', () {
     final UserTestContentProvider contentProvider = UserTestContentProvider();
     test('insert data', () async {
-      User user = User(name: "Thiago", value: 10);
+      User user = User(name: "name", value: 10);
       await contentProvider.insert(user.toMap());
     });
     test('check data', () async{

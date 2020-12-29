@@ -3,7 +3,7 @@ import 'package:sqflite/sqlite_api.dart';
 
 class UserDatabaseTestHelper extends BaseDatabase{
 
-  static final _databaseName = "MyDatabase.db";
+  static final _databaseName = "TestDatabase.db";
   static final _databaseVersion = 1;
 
   final table = 'my_table';
