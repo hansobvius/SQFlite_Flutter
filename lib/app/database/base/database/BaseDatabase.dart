@@ -32,10 +32,22 @@ abstract class BaseDatabase{
 
   Future<Database> _initDatabase() async {
     String path = await createDir();
-    return await openDatabase(path, version: _version, onCreate: onCreate);
+    return await openDatabase(
+        path,
+        version: _version,
+        onCreate: onCreate,
+        onUpgrade: onUpdate);
   }
 
   Future<void> onCreate(Database db, int version) async{
     await db.execute(entityTable());
+  }
+
+  Future<void> onUpdate(Database db, int oldVersion, int newVersion) async{
+    var batch =  db.batch();
+    if(oldVersion == 1){
+      batch.execute(entityTable());
+    }
+    await batch.commit();
   }
 }
