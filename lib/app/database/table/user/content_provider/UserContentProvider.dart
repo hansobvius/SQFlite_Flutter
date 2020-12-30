@@ -1,4 +1,4 @@
-import 'file:///C:/Users/cin_tcaiado/FlutterProjects/SQFlite_Flutter/lib/app/database/base/provider/BaseProvider.dart';
+import 'package:flutter_sqflite_example/app/database/base/provider/BaseProvider.dart';
 import 'package:flutter_sqflite_example/app/database/base/provider/IProvider.dart';
 import 'package:sqflite/sqflite.dart';
 import '../helper/UserDatabaseHelper.dart';
@@ -9,7 +9,7 @@ class UserContentProvider extends BaseProvider<UserDatabaseHelper> implements IP
 
   @override
   Future<int> insert(Map<String, dynamic> row) async {
-    return await db.insert(entityDatabase.table, row);
+    return await db.insert(entityDatabase.table, row, conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
   @override

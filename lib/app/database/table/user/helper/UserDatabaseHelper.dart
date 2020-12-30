@@ -11,6 +11,7 @@ class UserDatabaseHelper extends BaseDatabase{
   final table = 'my_table';
   final columnId = '_id';
   final columnName = 'name';
+  final columnGenre = 'genre';
   final columnValue = 'value';
 
   UserDatabaseHelper(): super(_databaseName, _databaseVersion);
@@ -22,6 +23,7 @@ class UserDatabaseHelper extends BaseDatabase{
           CREATE TABLE $table (
             $columnId INTEGER PRIMARY KEY,
             $columnName TEXT NOT NULL,
+            $columnGenre Text,
             $columnValue INTEGER NOT NULL
           )
           ''';
