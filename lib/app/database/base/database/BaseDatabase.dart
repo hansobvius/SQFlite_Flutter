@@ -11,8 +11,12 @@ abstract class BaseDatabase{
 
   final String _databaseName;
   final int _version;
+  final String _table;
 
-  BaseDatabase(String databaseName, int version) : _databaseName = databaseName, _version = version;
+  BaseDatabase(String databaseName, int version, String table) :
+    _databaseName = databaseName,
+    _version = version,
+    _table = table;
 
   Future<Database> getDatabase();
 
@@ -45,7 +49,8 @@ abstract class BaseDatabase{
 
   Future<void> onUpdate(Database db, int oldVersion, int newVersion) async{
     var batch =  db.batch();
-    if(oldVersion == 1){
+    if(oldVersion < newVersion){
+      db.rawQuery("DROP TABLE IF EXISTS $_table");
       batch.execute(entityTable());
     }
     await batch.commit();

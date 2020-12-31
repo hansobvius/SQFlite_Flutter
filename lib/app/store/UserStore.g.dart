@@ -34,11 +34,11 @@ mixin _$UserStore on _UserStore, Store {
   final _$_UserStoreActionController = ActionController(name: '_UserStore');
 
   @override
-  void insertUser(String name, int value) {
+  void insertUser(String name, String genre, int value) {
     final _$actionInfo =
         _$_UserStoreActionController.startAction(name: '_UserStore.insertUser');
     try {
-      return super.insertUser(name, value);
+      return super.insertUser(name, genre, value);
     } finally {
       _$_UserStoreActionController.endAction(_$actionInfo);
     }

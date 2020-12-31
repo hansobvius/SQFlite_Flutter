@@ -27,9 +27,9 @@ abstract class _UserStore with Store{
   }
 
   @action
-  void insertUser(String name, int value){
+  void insertUser(String name, String genre, int value){
     resetUser();
-    mainDomain.insert(User(name: name, value: value).toMap());
+    mainDomain.insert(User(name: name, genre: genre, value: value).toMap());
   }
 
   @action

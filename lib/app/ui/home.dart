@@ -33,8 +33,8 @@ class _HomeState extends State<Home>{
     super.dispose();
   }
 
-  void insertData(String name, int value){
-    _store..insertUser(name, value)..queryUser();
+  void insertData(String name, String genre, int value){
+    _store..insertUser(name, genre, value)..queryUser();
   }
 
   void deleteData(){
@@ -73,7 +73,7 @@ class _HomeState extends State<Home>{
                         child: RaisedButton(
                           child: Text('insert', style: TextStyle(fontSize: 14),),
                           onPressed: (){
-                            this.insertData('Thiago', Random().nextInt(10));
+                            this.insertData('Thiago', 'male', Random().nextInt(10));
                           },
                         ),
                       ),

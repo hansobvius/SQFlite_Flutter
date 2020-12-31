@@ -6,15 +6,17 @@ import 'package:sqflite/sqlite_api.dart';
 class UserDatabaseHelper extends BaseDatabase{
 
   static final _databaseName = "MyDatabase.db";
-  static final _databaseVersion = 1;
+  static final _databaseVersion = 2;
+  static final  String _table = "my_table";
 
   final table = 'my_table';
+
   final columnId = '_id';
   final columnName = 'name';
   final columnGenre = 'genre';
   final columnValue = 'value';
 
-  UserDatabaseHelper(): super(_databaseName, _databaseVersion);
+  UserDatabaseHelper(): super(_databaseName, _databaseVersion, _table);
 
   static final UserDatabaseHelper instance = UserDatabaseHelper();
 
