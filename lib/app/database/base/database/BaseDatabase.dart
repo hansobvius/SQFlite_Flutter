@@ -12,6 +12,7 @@ abstract class BaseDatabase{
   final String _databaseName;
   final int _version;
   final String _table;
+  bool _hasMigration = true;
 
   BaseDatabase(String databaseName, int version, String table) :
     _databaseName = databaseName,
@@ -39,20 +40,19 @@ abstract class BaseDatabase{
     return await openDatabase(
         path,
         version: _version,
-        onCreate: onCreate,
-        onUpgrade: onUpdate);
+        onCreate: _onCreate,
+        onUpgrade: _onUpdate);
   }
 
-  Future<void> onCreate(Database db, int version) async{
-    await db.execute(entityTable());
+  Future<void> _onCreate(Database db, int version) async{
+    bool tableExists = Sqflite.firstIntValue(await db.rawQuery('SELECT COUNT(*) FROM $_table')) != 0;
+    if(!tableExists) await db.execute(entityTable());
   }
 
-  Future<void> onUpdate(Database db, int oldVersion, int newVersion) async{
+  Future<void> _onUpdate(Database db, int oldVersion, int newVersion) async{
     var batch =  db.batch();
     if(oldVersion < newVersion){
-      db.rawQuery("DROP TABLE IF EXISTS $_table");
-      batch.execute(entityTable());
+      batch.execute('ALTER TABLE $_table DROP COLUMN genre');
     }
-    await batch.commit();
   }
 }

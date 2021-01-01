@@ -60,7 +60,9 @@ class _HomeState extends State<Home>{
                         itemBuilder: (BuildContext context, int index){
                           return Container(
                             child: Text(
-                                'ROW ${index + 1}: NAME ${_store.mUser[index].name} VALUE ${_store.mUser[index].value}'
+                                'ROW ${index + 1}: '
+                                    'NAME ${_store.mUser[index].name ?? ''} '
+                                    'VALUE ${_store.mUser[index].value ?? ''}'
                             )
                           );
                         }

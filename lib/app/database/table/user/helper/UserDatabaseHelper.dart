@@ -7,13 +7,12 @@ class UserDatabaseHelper extends BaseDatabase{
 
   static final _databaseName = "MyDatabase.db";
   static final _databaseVersion = 2;
-  static final  String _table = "my_table";
 
-  final table = 'my_table';
+  static final  String _table = "my_table";
+  String get table => _table;
 
   final columnId = '_id';
   final columnName = 'name';
-  final columnGenre = 'genre';
   final columnValue = 'value';
 
   UserDatabaseHelper(): super(_databaseName, _databaseVersion, _table);
@@ -25,7 +24,6 @@ class UserDatabaseHelper extends BaseDatabase{
           CREATE TABLE $table (
             $columnId INTEGER PRIMARY KEY,
             $columnName TEXT NOT NULL,
-            $columnGenre Text,
             $columnValue INTEGER NOT NULL
           )
           ''';
