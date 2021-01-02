@@ -62,6 +62,7 @@ class _HomeState extends State<Home>{
                             child: Text(
                                 'ROW ${index + 1}: '
                                     'NAME ${_store.mUser[index].name ?? ''} '
+                                    'GENRE ${_store.mUser[index].genre ?? ''} '
                                     'VALUE ${_store.mUser[index].value ?? ''}'
                             )
                           );

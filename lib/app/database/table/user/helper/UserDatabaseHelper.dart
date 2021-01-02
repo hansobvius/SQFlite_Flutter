@@ -6,28 +6,30 @@ import 'package:sqflite/sqlite_api.dart';
 class UserDatabaseHelper extends BaseDatabase{
 
   static final _databaseName = "MyDatabase.db";
-  static final _databaseVersion = 2;
+  static final _databaseVersion = 1;
 
-  static final  String _table = "my_table";
-  String get table => _table;
+  UserDatabaseHelper(): super(_databaseName, _databaseVersion);
+  static final UserDatabaseHelper instance = UserDatabaseHelper();
 
+  final table = "my_table";
   final columnId = '_id';
   final columnName = 'name';
+  final columnGenre = 'genre';
   final columnValue = 'value';
-
-  UserDatabaseHelper(): super(_databaseName, _databaseVersion, _table);
-
-  static final UserDatabaseHelper instance = UserDatabaseHelper();
 
   @override
   String entityTable() => '''
           CREATE TABLE $table (
             $columnId INTEGER PRIMARY KEY,
             $columnName TEXT NOT NULL,
+            $columnGenre Text,
             $columnValue INTEGER NOT NULL
           )
           ''';
 
   @override
   Future<Database> getDatabase() async => getInitDatabase();
+
+  @override
+  List<String> alterTable() => [];
 }

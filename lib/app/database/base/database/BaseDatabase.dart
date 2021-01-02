@@ -11,17 +11,16 @@ abstract class BaseDatabase{
 
   final String _databaseName;
   final int _version;
-  final String _table;
-  bool _hasMigration = true;
 
-  BaseDatabase(String databaseName, int version, String table) :
+  BaseDatabase(String databaseName, int version) :
     _databaseName = databaseName,
-    _version = version,
-    _table = table;
+    _version = version;
 
   Future<Database> getDatabase();
 
   String entityTable();
+
+  List<String> alterTable();
 
   Future<String> createDir() async {
     final Directory documentsDirectory = await path_provider.getApplicationDocumentsDirectory();
@@ -45,14 +44,17 @@ abstract class BaseDatabase{
   }
 
   Future<void> _onCreate(Database db, int version) async{
-    bool tableExists = Sqflite.firstIntValue(await db.rawQuery('SELECT COUNT(*) FROM $_table')) != 0;
-    if(!tableExists) await db.execute(entityTable());
+    await db.execute(entityTable());
   }
 
   Future<void> _onUpdate(Database db, int oldVersion, int newVersion) async{
     var batch =  db.batch();
     if(oldVersion < newVersion){
-      batch.execute('ALTER TABLE $_table DROP COLUMN genre');
+      if(alterTable() != null && alterTable().isNotEmpty){
+        alterTable().forEach((alterTable) {
+          batch.execute(alterTable);
+        });
+      }
     }
   }
 }
