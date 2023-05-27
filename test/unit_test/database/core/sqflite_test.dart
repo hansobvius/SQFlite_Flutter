@@ -12,7 +12,7 @@ void main(){
 
 void checkInsertDB(){
 
-  UserTestContentProvider _contentProvider;
+  late UserTestContentProvider _contentProvider;
 
   group('Database core test', () {
 

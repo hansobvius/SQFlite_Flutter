@@ -10,7 +10,7 @@ class Home extends StatefulWidget{
 
   final ServiceLocator serviceLocator;
 
-  Home({this.serviceLocator});
+  Home({required this.serviceLocator});
 
   @override
   _HomeState createState() => _HomeState();
@@ -18,8 +18,7 @@ class Home extends StatefulWidget{
 
 class _HomeState extends State<Home>{
 
-  UserStore _store;
-  List<User> mUserList;
+  late UserStore _store;
 
   @override
   void initState(){

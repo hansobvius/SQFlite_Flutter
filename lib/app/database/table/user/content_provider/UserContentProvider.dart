@@ -9,29 +9,33 @@ class UserContentProvider extends BaseProvider<UserDatabaseHelper> implements IP
 
   @override
   Future<int> insert(Map<String, dynamic> row) async {
-    return await db.insert(entityDatabase.table, row, conflictAlgorithm: ConflictAlgorithm.replace);
+    if (db == null) throw('Database not initialized');
+    return await db!.insert(entityDatabase.table, row, conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
   @override
   Future<List<Map<String, dynamic>>> queryAllRows() async {
-    if(db == null) await initDataBase();
-    return await db.query(entityDatabase.table);
+    if (db == null) throw('Database not initialized');
+    return await db!.query(entityDatabase.table);
   }
 
   @override
   Future<int> queryRowCount() async {
+    if (db == null) throw('Database not initialized');
     return Sqflite.firstIntValue(
-        await db.rawQuery('SELECT COUNT(*) FROM $entityDatabase.table')
-    );
+        await db!.rawQuery('SELECT COUNT(*) FROM $entityDatabase.table')
+    ) ?? 0;
   }
 
   @override
   Future<int> update(Map<String, dynamic> row, String columnId) async {
-    return await db.update(entityDatabase.table, row, where: '$columnId = ?', whereArgs: [row[columnId]]);
+    if (db == null) throw('Database not initialized');
+    return await db!.update(entityDatabase.table, row, where: '$columnId = ?', whereArgs: [row[columnId]]);
   }
 
   @override
   Future<int> delete() async {
-    return await db.delete(entityDatabase.table);
+    if (db == null) throw('Database not initialized');
+    return await db!.delete(entityDatabase.table);
   }
 }

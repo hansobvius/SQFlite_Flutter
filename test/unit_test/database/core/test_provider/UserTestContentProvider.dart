@@ -10,32 +10,32 @@ class UserTestContentProvider extends BaseProvider<UserDatabaseTestHelper> imple
   @override
   Future<int> insert(Map<String, dynamic> row) async {
     if(db == null) await initDataBase();
-    return await db.insert(entityDatabase.table, row);
+    return await db!.insert(entityDatabase.table, row);
   }
 
   @override
   Future<List<Map<String, dynamic>>> queryAllRows() async {
     if(db == null) await initDataBase();
-    return await db.query(entityDatabase.table);
+    return await db!.query(entityDatabase.table);
   }
 
   @override
   Future<int> queryRowCount() async {
     if(db == null) await initDataBase();
     return Sqflite.firstIntValue(
-        await db.rawQuery('SELECT COUNT(*) FROM $entityDatabase.table')
-    );
+        await db!.rawQuery('SELECT COUNT(*) FROM $entityDatabase.table')
+    ) ?? 0;
   }
 
   @override
   Future<int> update(Map<String, dynamic> row, String columnId) async {
     if(db == null) await initDataBase();
-    return await db.update(entityDatabase.table, row, where: '$columnId = ?', whereArgs: [row[columnId]]);
+    return await db!.update(entityDatabase.table, row, where: '$columnId = ?', whereArgs: [row[columnId]]);
   }
 
   @override
   Future<int> delete() async {
     if(db == null) await initDataBase();
-    return await db.delete(entityDatabase.table);
+    return await db!.delete(entityDatabase.table);
   }
 }

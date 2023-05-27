@@ -4,9 +4,9 @@ import 'package:flutter_sqflite_example/app/store/UserStore.dart';
 
 class ServiceLocator{
 
-  UserContentProvider contentProvider;
-  UserStore userStore;
-  MainDomain mainDomain;
+  late UserContentProvider contentProvider;
+  late UserStore userStore;
+  late MainDomain mainDomain;
 
   ServiceLocator(){
     providerModule();

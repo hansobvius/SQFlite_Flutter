@@ -1,10 +1,12 @@
 class User{
 
-  String name;
-  String genre;
-  int value;
+  String? name;
+  String? genre;
+  int? value;
 
   User({this.name, this.genre, this.value});
+
+  factory User.instance() => User();
 
   Map<String, dynamic> toMap(){
     return {

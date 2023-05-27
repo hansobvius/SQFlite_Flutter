@@ -5,7 +5,7 @@ class MainDomain{
 
   final UserContentProvider contentProvider;
 
-  MainDomain({this.contentProvider});
+  MainDomain({required this.contentProvider});
 
   void insert(Map<String, dynamic> userRow) async {
     await contentProvider.insert(userRow);

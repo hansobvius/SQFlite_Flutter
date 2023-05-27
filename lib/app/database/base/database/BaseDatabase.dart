@@ -7,7 +7,7 @@ import 'package:path_provider/path_provider.dart' as path_provider;
 
 abstract class BaseDatabase{
 
-  static Database _database;
+  late final Database _database;
 
   final String _databaseName;
   final int _version;

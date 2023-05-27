@@ -6,14 +6,14 @@ part 'UserStore.g.dart';
 
 class UserStore extends _UserStore with _$UserStore{
   final MainDomain mainDomain;
-  UserStore({this.mainDomain}) : super.constructor(mainDomain: mainDomain);
+  UserStore({required this.mainDomain}) : super.constructor(mainDomain: mainDomain);
 }
 
 abstract class _UserStore with Store{
 
   final MainDomain mainDomain;
 
-  _UserStore.constructor({this.mainDomain});
+  _UserStore.constructor({required this.mainDomain});
 
   @observable
   ObservableList<User> mUser = ObservableList<User>();
@@ -22,7 +22,7 @@ abstract class _UserStore with Store{
   Future queryUser() async{
     var query =  await mainDomain.query();
     query.forEach((element) {
-      mUser.add(User().fromMap(element));
+      mUser.add(User.instance().fromMap(element));
     });
   }
 
