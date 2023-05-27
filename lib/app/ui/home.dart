@@ -73,7 +73,7 @@ class _HomeState extends State<Home>{
                   Row(
                     children: <Widget>[
                       Expanded(
-                        child: RaisedButton(
+                        child: ElevatedButton(
                           child: Text('insert', style: TextStyle(fontSize: 14),),
                           onPressed: (){
                             this.insertData('Thiago', 'male', Random().nextInt(10));
@@ -81,7 +81,7 @@ class _HomeState extends State<Home>{
                         ),
                       ),
                       Expanded(
-                        child: RaisedButton(
+                        child: ElevatedButton(
                           child: Text('delete', style: TextStyle(fontSize: 14),),
                           onPressed: (){
                             this.deleteData();
