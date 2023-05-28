@@ -21,7 +21,7 @@ void checkInsertDB(){
     });
 
     test('insert data', () async {
-      User user = User(name: "name", genre: "male", value: 10,);
+      User user = User(name: "name", genre: "male", value: 10);
       await _contentProvider.insert(user.toMap());
     });
 

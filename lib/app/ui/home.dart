@@ -75,6 +75,7 @@ class _HomeState extends State<Home>{
                         child: Padding(
                           padding: const EdgeInsets.only(left: 16.0, right: 8.0),
                           child: ElevatedButton(
+                            key: const Key('INSERT_KEY'),
                             child: Text('insert', style: TextStyle(fontSize: 14)),
                             onPressed: (){
                               this.insertData('Thiago', 'male', Random().nextInt(10));
@@ -86,6 +87,7 @@ class _HomeState extends State<Home>{
                         child: Padding(
                           padding: const EdgeInsets.only(left: 8.0, right: 16.0),
                           child: ElevatedButton(
+                            key: const Key('DELETE_KEY'),
                             child: Text('delete', style: TextStyle(fontSize: 14),),
                             onPressed: (){
                               this.deleteData();
