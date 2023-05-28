@@ -1,5 +1,5 @@
+import 'package:flutter_sqflite_example/app/model/User.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'test_model/User.dart';
 import 'test_provider/UserTestContentProvider.dart';
 
 /// To run the following test, execute on the terminal:
@@ -21,7 +21,7 @@ void checkInsertDB(){
     });
 
     test('insert data', () async {
-      User user = User(name: "name", value: 10);
+      User user = User(name: "name", genre: "male", value: 10,);
       await _contentProvider.insert(user.toMap());
     });
 
@@ -32,6 +32,7 @@ void checkInsertDB(){
         userList.add(User().fromMap(obj));
       }
       expect(userList[0].name, 'name');
+      expect(userList[0].genre, 'male');
       expect(userList[0].value, 10);
       await _contentProvider.delete();
     });

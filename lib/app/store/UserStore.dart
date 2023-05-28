@@ -38,5 +38,7 @@ abstract class _UserStore with Store{
     mainDomain.delete();
   }
 
-  void resetUser(){if(mUser.isNotEmpty) mUser.clear();}
+  void resetUser(){
+    if(mUser.isNotEmpty) mUser.clear();
+  }
 }

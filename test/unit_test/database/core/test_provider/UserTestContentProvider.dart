@@ -9,7 +9,7 @@ class UserTestContentProvider extends BaseProvider<UserDatabaseTestHelper> imple
 
   @override
   Future<int> insert(Map<String, dynamic> row) async {
-    if(db == null) await initDataBase();
+    if (db == null) await initDataBase();
     return await db!.insert(entityDatabase.table, row);
   }
 

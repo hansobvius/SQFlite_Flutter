@@ -7,7 +7,7 @@ import 'package:path_provider/path_provider.dart' as path_provider;
 
 abstract class BaseDatabase{
 
-  late final Database _database;
+  Database? _database;
 
   final String _databaseName;
   final int _version;
@@ -29,9 +29,9 @@ abstract class BaseDatabase{
   }
 
   Future<Database> getInitDatabase() async{
-    if (_database != null) return _database;
+    if (_database != null) return _database!;
     _database = await _initDatabase();
-    return _database;
+    return _database!;
   }
 
   Future<Database> _initDatabase() async {
